@@ -1,0 +1,33 @@
+name: Python package
+
+on: [push]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    environment: ci
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10"]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          cache: poetry
+          python-version: ${{ matrix.python-version }}
+      - name: Install rasa
+        run: poetry install
+      - name: Save the output of 'rasa --version'
+        continue-on-error: true
+        env:
+          RASA_PRO_LICENSE: aaaaa.bbbbb.ccccc
+        run: |
+          echo "RASA_RUN_STDOUT='$(poetry run rasa --version 2>&1)'" >> $GITHUB_ENV
+      - name: Compare actual output to known good
+        run: |
+          [[ "$RASA_RUN_STDOUT" =~ "Failed to validate Rasa Pro license" ]]
