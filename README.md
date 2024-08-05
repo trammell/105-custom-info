@@ -1,6 +1,16 @@
-# rasa-pro-3.9.x-poetry-template
+# 
 
-Generic repository template for a Rasa Pro 3.9.x bot, using [`poetry`](https://python-poetry.org/).
+
+## Resources
+
+* <https://www.postgresqltutorial.com/postgresql-indexes/postgresql-full-text-search/>
+* https://rasa.com/docs/rasa-pro/concepts/policies/custom-information-retrievers
+* https://www.postgresql.org/docs/current/textsearch-controls.html#TEXTSEARCH-RANKING
+https://stackoverflow.com/questions/12933805/best-way-to-use-postgresql-full-text-search-ranking
+
+* 
+
+
 
 ```shell
 # This template is for poetry v1.8
